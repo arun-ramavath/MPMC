@@ -1,0 +1,23 @@
+assume cs:code, es:extra
+
+extra segment
+str db 'cmrit$ece'
+extra ends
+
+code segment
+start:
+    mov ax, extra
+    mov es, ax
+    mov di, offset str
+    mov al, '$'
+    mov cl, 0ah
+    cld
+up:
+    scasb
+    je down
+    inc cl
+    jmp up
+down:
+    int 03h
+code ends
+end start
