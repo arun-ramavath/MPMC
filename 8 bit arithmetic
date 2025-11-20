@@ -1,0 +1,15 @@
+assume cs:code, ds:data
+data segment
+    a1 db 34h
+    a2 db 21h
+data ends
+code segment
+start:
+    mov ax, data
+    mov ds, ax
+    mov al, a1
+    mov bl, a2
+    add al, bl
+    int 03h
+code ends
+end start
