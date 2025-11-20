@@ -1,0 +1,33 @@
+assume cs:code, ds:data
+
+data segment
+    array db 08h,03h,09h,05h,02h
+    count equ 05h
+data ends
+
+code segment
+start:
+    mov ax, data
+    mov ds, ax
+
+    mov dl, count
+    dec dl
+back:
+    mov cl, dl
+    mov si, offset array
+again:
+    mov al, [si]
+    cmp al, [si+1]
+    jb go
+    xchg al, [si+1]
+    xchg al, [si]
+go:
+    inc si
+    loop again
+    dec dl
+    jnz back
+
+    mov ah, 4ch
+    int 21h
+code ends
+end start
